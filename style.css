@@ -1,0 +1,104 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.logo-container img {
+  max-width: 200px;
+  height: auto;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.wardrobe-category {
+  margin-bottom: 30px;
+}
+.category-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.items-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 15px;
+}
+.item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  min-width: 160px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.item img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+.item span {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+.price {
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 1em;
+  color: green;
+}
+button {
+  padding: 5px 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eee;
+  cursor: pointer;
+}
+.favorite-button, .unfavorite-button {
+  background-color: #ddd;
+  color: #333;
+  font-size: 1em;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  cursor: pointer;
+  margin-left: auto; /* Przesuń na prawą stronę */
+  margin-top: 5px;
+}
+.unfavorite-button {
+  background-color: #fdd;
+}
+.item > div { /* Kontener dla tekstu i przycisku */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.item > div > span {
+  width: 100%;
+  text-align: center;
+}
+.favorite-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wybierz swoją szafę</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Dodatkowy styl, aby upewnić się, że "Batch:" jest pod ceną */
+        .item span {
+            display: block; /* Każdy span w item będzie w nowej linii */
+            text-align: center; /* Wycentruj tekst w spanach */
+        }
+        .item img {
+             display: block; /* Obrazek też w nowej linii */
+             margin-left: auto; /* Centrowanie obrazka */
+             margin-right: auto; /* Centrowanie obrazka */
+             margin-bottom: 5px; /* Odstęp pod obrazkiem */
+        }
+        .item .price {
+            font-weight: bold; /* Pogrubienie ceny */
+            margin-top: 5px; /* Odstęp nad ceną */
+        }
+        .item .batch-info {
+            font-size: 0.9em; /* Mniejsza czcionka dla "Batch:" */
+            color: grey; /* Szary kolor dla "Batch:" */
+            margin-top: 2px; /* Mały odstęp nad "Batch:" */
+        }
+
+        /* === STYLE DLA OKIENKA POWITALNEGO === */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup h2 {
+            margin-top: 0;
+        }
+
+        .popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #e03e00;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === OKIENKO POWITALNE === -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <h2>👋 Jak poruszać się po stronie</h2>
+
+            <ul style="text-align: left; padding-left: 20px; line-height: 1.6;">
+              <li><strong>Batch</strong> jest opisany przy każdym produkcie:
+                <ul style="margin-top: 5px;">
+                  <li><strong> Best</strong> – najlepszy i najczęściej polecany batch.</li>
+                  <li><strong> Random</strong> – mniej popularny, ale często dorównuje jakością.</li>
+                </ul>
+              </li>
+
+              <li>❤️ Możesz dodać rzeczy do zakładki <strong>"Ulubione"</strong>, więc nic Ci nie zniknie.</li>
+
+              <li>🔥 Do rejestracji użyj <strong>linku na stronie</strong>, żeby mnie wesprzeć!</li>
+            </ul>
+            <button onclick="closePopup()">Rozumiem</button>
+        </div>
+    </div>
+
+    <!-- Logo i link -->
+    <div class="logo-container" style="text-align: center; margin-top: 1px;">
+        <img src="images/logo.png" alt="Logo strony" style="max-width: 200px; height: auto; display: block; margin: 0 auto;">
+
+        <div style="margin-top: 15px;">
+            <a href="https://ikako.vip/r/Ruffli" 
+               style="display: inline-block; padding: 12px 24px; background-color: #ff4500; color: white; font-size: 18px; font-weight: bold; border-radius: 8px; text-decoration: none; transition: background-color 0.3s;">
+               🔥 Link do Rejestracji🔥
+            </a>
+        </div>
+    </div>
+
+    <!-- Przyciski -->
+    <div style="text-align: center; margin: 25px 0;">
+        <button onclick="showMain()">🏠 Główna</button>
+        <button onclick="showFavorites()">❤️ Ulubione</button>
+    </div>
+
+    <!-- === SKRYPT DO POPUPU === -->
+    <script>
+        // Pokaż popup po załadowaniu strony
+        window.onload = function() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        // Zamknij popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">
+        <div class="category-title">Bluzy / Swetry</div>
+        <div class="items-container">
+              <div class="item" data-name="Denim Tears hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D794384453885&affcode=hago105" data-img="denim2.png" data-price="163" onclick="window.location.href=this.dataset.link">
+                    <img src="images/denim2.png" alt="Denim Tears hoodie">
+                    <span>Denim Tears hoodie</span>
+                    <span class="price">163 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+
+                      <div style="margin-top: 8px;">
+                        <a href="https://imgur.com/a/c7x1AXm" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                          📷 QC (sprawdź zdjęcia)
+                        </a>
+                      </div>
+              </div>
+                  <div class="item" data-name="Broken Planet sweter" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fshop1621342910.v.weidian.com%2Fitem.html%3FitemID%3D7342510584" data-img="obraz_2025-04-12_194946331-removebg-preview.png" data-price="107" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_194946331-removebg-preview.png" alt="Broken Planet sweter">
+                    <span>Broken Planet sweter</span>
+                    <span class="price">107 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+
+                      <div style="margin-top: 8px;">
+                                  <a href="https://imgur.com/a/lUFNDfM" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                                    📷 QC (sprawdź zdjęcia)
+                                  </a>
+                        </div>
+                  </div>
+              <div class="item" data-name="YZY x Gap" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D683748985499" data-img="obraz_2025-04-12_202522929.png" data-price="274" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_202522929.png" alt="yzy x gap">
+                  <span>YZY x Gap</span>
+                  <span class="price">274 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+                  <div style="margin-top: 8px;">
+                            <a href="https://imgur.com/a/T699f8L" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                              📷 QC (sprawdź zdjęcia)
+                            </a>
+                  </div>
+              </div>
+              <div class="item" data-name="Playboy Carti Mugshot" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7251118401&affcode=vector&redirected=true" data-img="obraz_2025-04-12_203425513.png" data-price="126" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_203425513.png" alt="Playboy carti mugshot hoodie">
+                  <span>Playboy Carti Mugshot</span>
+                  <span class="price">126 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+                  <div style="margin-top: 8px;">
+                              <a href="https://imgur.com/a/sYN2P7X" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                                📷 QC (sprawdź zdjęcia)
+                              </a>
+                    </div>
+              </div>
+              <div class="item" data-name="Stuusy Bilard Sweater" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D640860232414&affcode=vector&redirected=true" data-img="obraz_2025-04-13_004432523.png" data-price="79" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_004432523.png" alt="Stuusy Bilard Sweater">
+                  <span>Stuusy Bilard Sweater</span>
+                  <span class="price">79 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+                  <div style="margin-top: 8px;">
+                            <a href="https://imgur.com/a/xP9mWUd" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                              📷 QC (sprawdź zdjęcia)
+                            </a>
+                  </div>
+              </div>
+             <div class="item" data-name="Supreme Hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D867141129614&affcode=vector&redirected=true" data-img="obraz_2025-04-13_004019155.png" data-price="177" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_004019155.png" alt="Supreme Hoodie">
+                  <span>Supreme Hoodie</span>
+                  <span class="price">177 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+                 <div style="margin-top: 8px;">
+                 <a href="https://imgur.com/a/BrsPn3l" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                               📷 QC (sprawdź zdjęcia)
+                             </a>
+                   </div>
+             </div>
+            <div class="item" data-name="Akimbo club zip up hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D902563141059" data-img="obraz_2025-04-12_153814218-removebg-preview.png" data-price="110" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_153814218-removebg-preview.png" alt="Akimbo club zip up hoodie">
+                  <span>Akimbo club zip up hoodie</span>
+                  <span class="price">110 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+                <div class="item" data-name="AcneStudio" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3F%26id%3D741723985072" data-img="obraz_2025-04-12_195224260-removebg-preview.png" data-price="162" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_195224260-removebg-preview.png" alt="AcneStudio">
+                    <span>AcneStudio</span>
+                    <span class="price">162 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+            <div class="item" data-name="Cortiez Hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D756625609142&affcode=hago105" data-img="obraz_2025-04-12_185119432-removebg-preview.png" data-price="97" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_185119432-removebg-preview.png" alt="Cortiez Hoodie">
+                  <span>Cortiez Hoodie</span>
+                  <span class="price">97 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+                <div style="margin-top: 8px;">
+                     <a href="https://imgur.com/a/QuIgQQS" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                                   📷 QC (sprawdź zdjęcia)
+                                 </a>
+                       </div>
+            </div>
+            <div class="item" data-name="Ralph Lauren Zip sweter" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4438354771&affcode=hago105" data-img="rl-sweter.png" data-price="102" onclick="window.location.href=this.dataset.link">
+                <img src="images/rl-sweter.png" alt="Ralph Lauren Zip sweter">
+                <span>Ralph Lauren Zip sweter</span>
+                <span class="price">102 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+                <div style="margin-top: 8px;">
+                     <a href="https://imgur.com/a/c7WB6Qm" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                                   📷 QC (sprawdź zdjęcia)
+                                 </a>
+                       </div>
+            </div>
+            <div class="item" data-name="Akimbo" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D901824151162" data-img="obraz_2025-04-12_144644555-removebg-preview.png" data-price="110" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_144644555-removebg-preview.png" alt="Akimbo">
+                  <span>Akimbo</span>
+                  <span class="price">110 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Ralph Lauren sweter" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D738528616022&affcode=hago105" data-img="rl-sweter-1.png" data-price="56" onclick="window.location.href=this.dataset.link">
+                <img src="images/rl-sweter-1.png" alt="Ralph Lauren sweter">
+                <span>Ralph Lauren sweter</span>
+                <span class="price">56 PLN</span>
+                <span class="batch-info">Batch: Random</span>
+            </div>
+              <div class="item" data-name="Saint Alexander hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D895833790403" data-img="obraz_2025-04-12_144039408-removebg-preview.png" data-price="164" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_144039408-removebg-preview.png" alt="Saint Alexander hoodie">
+                  <span>Saint Alexander hoodie</span>
+                  <span class="price">164 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Cortiez Collage Zip Hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7410765649%26wfr%3Dc" data-img="obraz_2025-04-12_192720553-removebg-preview.png" data-price="119" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_192720553-removebg-preview.png" alt="Cortiez Collage Zip Hoodie">
+                  <span>Cortiez Collage Zip Hoodie</span>
+                  <span class="price">119 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Bape Shark" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D576586450439" data-img="bape-shark.png" data-price="214" onclick="window.location.href=this.dataset.link">
+                <img src="images/bape-shark.png" alt="Bape Shark">
+                <span>Bape Shark</span>
+                <span class="price">214 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+                    <div class="item" data-name="Supreme Grey Crewneck" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D758931178004&affcode=hago105" data-img="supreme2.png" data-price="103" onclick="window.location.href=this.dataset.link">
+                        <img src="images/supreme2.png" alt="Supreme Grey Crewneck">
+                        <span>Supreme Grey Crewneck</span>
+                        <span class="price">103 PLN</span>
+                        <span class="batch-info">Batch: Best</span>
+                    </div>
+            <div class="item" data-name="Sp5der Grey" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D823014530301&affcode=hago105" data-img="spider1.png" data-price="132" onclick="window.location.href=this.dataset.link">
+                      <img src="images/spider1.png" alt="Sp5der Grey">
+                      <span>Sp5der Grey</span>
+                      <span class="price">132 PLN</span>
+                      <span class="batch-info">Batch: Best</span>
+                  </div>
+            <div class="item" data-name="Chrome hearts" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7237036809&affcode=hago105" data-img="chrome-heart.png" data-price="68" onclick="window.location.href=this.dataset.link">
+                    <img src="images/chrome-heart.png" alt="Chrome hearts">
+                    <span>Chrome hearts</span>
+                    <span class="price">68 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+            <div class="item" data-name="Sp5der pink Hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D823211521082&affcode=hago105" data-img="spider.png" data-price="65" onclick="window.location.href=this.dataset.link">
+                <img src="images/spider.png" alt="Sp5der pink Hoodie">
+                <span>Sp5der pink Hoodie</span>
+                <span class="price">65 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="RL Bear sweter" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6139189211&affcode=hago105" data-img="obraz_2025-04-12_142855008-removebg-preview.png" data-price="164" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_142855008-removebg-preview.png" alt="RL Bear sweter">
+                  <span>Ralph Lauren Bear sweter</span>
+                  <span class="price">164 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Zara Hoodie" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D892745127408" data-img="obraz_2025-04-12_200755440-removebg-preview.png" data-price="68" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_200755440-removebg-preview.png" alt="Zara Hoodie">
+                  <span>Zara Hoodie</span>
+                  <span class="price">68 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">
+        <div class="category-title">Koszuleczki</div>
+        <div class="items-container">
+            <div class="item" data-name="Cortiez No time 4 luv" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D814312447860%26sku_properties%3D1627207%3A28320" data-img="crtz2.png" data-price="43" onclick="window.location.href=this.dataset.link">
+                <img src="images/crtz2.png" alt="Cortiez No time 4 luv">
+                <span>Cortiez "No time 4 luv"</span>
+                <span class="price">43 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="Neymar Santos tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D786168578018%26spm%3Da213gs.v2success.0.0.77924831KEKYwy" data-img="obraz_2025-04-13_010605767-removebg-preview.png" data-price="46" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_010605767-removebg-preview.png" alt="Neymar Santos tee">
+                  <span>Neymar Santos tee</span>
+                  <span class="price">46 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="THE SCOTTS Tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D671986602618&affcode=vector&redirected=true" data-img="obraz_2025-04-12_201204325.png" data-price="27" onclick="window.location.href=this.dataset.link">
+                            <img src="images/obraz_2025-04-12_201204325.png" alt="THE SCOTTS Tee">
+                            <span>The Scotts Tee</span>
+                            <span class="price">27 PLN</span>
+                            <span class="batch-info">Batch: Random</span>
+                        </div>
+              <div class="item" data-name="Stussy x Bape tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7249751102&affcode=vector&redirected=true" data-img="obraz_2025-04-12_201446983.png" data-price="32" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_201446983.png" alt="Stussy x Bape tee">
+                  <span>Stussy x Bape tee</span>
+                  <span class="price">32 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Represent Vintage" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D713339086930%26spm%3Da213gs.success.result.1.36224831XDOZQu" data-img="obraz_2025-04-12_202243323-removebg-preview.png" data-price="54" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_202243323-removebg-preview.png" alt="Represent Vintage">
+                  <span>Represent Vintage</span>
+                  <span class="price">54 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Moncler T-shirt" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fshop1621999129.v.weidian.com%2Fitem.html%3FitemID%3D7392915082%26wfr%3Dc" data-img="obraz_2025-04-12_193527905-removebg-preview.png" data-price="43" onclick="window.location.href=this.dataset.link">
+                      <img src="images/obraz_2025-04-12_193527905-removebg-preview.png" alt="Moncler T-shirt">
+                      <span>Moncler T-shirt</span>
+                      <span class="price">43 PLN</span>
+                      <span class="batch-info">Batch: Random</span>
+                  </div>
+            <div class="item" data-name="Stussy Heart tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7445373855%26wfr%3Dc" data-img="obraz_2025-04-12_191808148.png" data-price="32" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_191808148.png" alt="Stussy Heart tee">
+                    <span>Stussy Heart tee</span>
+                    <span class="price">32 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+            <div class="item" data-name="Supreme tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7386333560&affcode=hago105" data-img="supreme.png" data-price="55" onclick="window.location.href=this.dataset.link">
+                  <img src="images/supreme.png" alt="Supreme tee">
+                  <span>Supreme tee</span>
+                  <span class="price">55 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Carson x Merch Tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7386357290&affcode=hago105" data-img="tee1.png" data-price="57" onclick="window.location.href=this.dataset.link">
+                  <img src="images/tee1.png" alt="Carson x Merch Tee">
+                  <span>Carson x Merch Tee</span>
+                  <span class="price">57 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+                <div class="item" data-name="Arte tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D902105226573" data-img="Bez_tytułu-removebg-preview.png" data-price="65" onclick="window.location.href=this.dataset.link">
+                    <img src="images/Bez_tytułu-removebg-preview.png" alt="Arte tee">
+                    <span>Arte tee</span>
+                    <span class="price">65 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+            <div class="item" data-name="Bape Classic" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D628597198711&affcode=hago105%5C" data-img="bape-tee1.png" data-price="52" onclick="window.location.href=this.dataset.link">
+                  <img src="images/bape-tee1.png" alt="Bape Classic">
+                  <span>Bape Classic</span>
+                  <span class="price">52 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+            <div class="item" data-name="Cortiez Arrow Tee" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7413521656" data-img="crtz3.png" data-price="43" onclick="window.location.href=this.dataset.link">
+                <img src="images/crtz3.png" alt="Cortiez Arrow Tee">
+                <span>Cortiez Arrow Tee</span>
+                <span class="price">43 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+            <div class="item" data-name="Cortiez Tees (4 styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fshop1776473773.v.weidian.com%2Fitem.html%3FitemID%3D7413474446%26spider_token%3Dfd5f" data-img="crtz4.png" data-price="43" onclick="window.location.href=this.dataset.link">
+                <img src="images/crtz4.png" alt="Cortiez Tees (4 styles)">
+                <span>Cortiez Tees (4 styles)</span>
+                <span class="price">43 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="Arte Flower Embroidery" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D902109750704" data-img="obraz_2025-04-12_154143433-removebg-preview.png" data-price="63" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_154143433-removebg-preview.png" alt="Arte Flower Embroidery">
+                  <span>Arte Flower Embroidery</span>
+                  <span class="price">63 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="football shirts" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7261712256&affcode=vector&redirected=true" data-img="obraz_2025-04-13_003529462-removebg-preview.png" data-price="87" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_003529462-removebg-preview.png" alt="football shirts">
+                  <span>football shirts</span>
+                  <span class="price">87 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">
+        <div class="category-title">Spodnie</div>
+        <div class="items-container">
+              <div class="item" data-name="Akimbo" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D901824151162" data-img="obraz_2025-04-12_144519872-removebg-preview.png" data-price="93" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_144519872-removebg-preview.png" alt="Akimbo">
+                  <span>Akimbo</span>
+                  <span class="price">93 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Chrome hearts pants" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D864972284438&affcode=vector&redirected=true" data-img="obraz_2025-04-12_211117089.png" data-price="98" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_211117089.png" alt="Chrome hearts pants">
+                  <span>Chrome hearts pants</span>
+                  <span class="price">98 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+                <div class="item" data-name="Gallery Dept. Pants (many styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7245956345&affcode=peter" data-img="obraz_2025-04-12_235532689.png" data-price="104" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_235532689.png" alt="Gallery Dept. Pants (many styles)">
+                    <span>Gallery Dept. Pants (many styles)</span>
+                    <span class="price">104 PLN</span>
+                    <span class="batch-info">Batch: Random</span>
+                </div>
+            <div class="item" data-name="Hellstar shorts" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fdetail.1688.com%2Foffer%2F743726290963.html&affcode=peter" data-img="obraz_2025-04-12_213049950.png" data-price="71" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_213049950.png" alt="Hellstar shorts">
+                  <span>Hellstar shorts</span>
+                  <span class="price">71 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+            <div class="item" data-name="Cortiez Basic Shorts" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fshop1776473773.v.weidian.com%2Fitem.html%3FitemID%3D7411628005%26spider_token%3Dff66" data-img="crtz1.png" data-price="85" onclick="window.location.href=this.dataset.link">
+                <img src="images/crtz1.png" alt="Cortiez Basic Shorts">
+                <span>Cortiez Basic Shorts</span>
+                <span class="price">85 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="Balenciaga x Adidas" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7292608528&affcode=hago105" data-img="adidas-pants.png" data-price="140" onclick="window.location.href=this.dataset.link">
+                  <img src="images/adidas-pants.png" alt="Balenciaga x Adidas">
+                  <span>Balenciaga x Adidas</span>
+                  <span class="price">140 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Amiri Pants" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D894088429426%26spm%3Da213gs.v2success.0.0.b1c94831PuQV3z%26sku_properties%3D1627207%253A28779286" data-img="obraz_2025-04-12_225832470-removebg-preview.png" data-price="100" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_225832470-removebg-preview.png" alt="Amiri Pants">
+                  <span>Amiri Pants</span>
+                  <span class="price">100 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Denim Tear Shorts" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D890979503778" data-img="Denim1.png" data-price="131" onclick="window.location.href=this.dataset.link">
+                <img src="images/Denim1.png" alt="Denim Tear Shorts">
+                <span>Denim Tear Shorts</span>
+                <span class="price">131 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+            <div class="item" data-name="Jordan shorts" data-link="https://kakobuy.com/item/details?url=https%3A%2F%2Fdetail.1688.com%2Foffer%2F730299414710.html%3Fspm%3Dfxg_1325870.all_page.0.0.25151845ms28QJ" data-img="jordanshorts.png" data-price="22" onclick="window.location.href=this.dataset.link">
+                <img src="images/jordanshorts.png" alt="Jordan shorts">
+                <span>Jordan shorts</span>
+                <span class="price">22 PLN</span>
+                <span class="batch-info">Batch: Random</span>
+            </div>
+              <div class="item" data-name="Palace Evisu Flower Jeans" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D830465371497&affcode=peter" data-img="obraz_2025-04-13_000927362.png" data-price="330" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_000927362.png" alt="Palace Evisu Flower Jeans">
+                  <span>Palace Evisu Flower Jeans</span>
+                  <span class="price">330 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="ADWYSD Pants" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D838858192680&affcode=hago105" data-img="pants.png" data-price="85" onclick="window.location.href=this.dataset.link">
+                  <img src="images/pants.png" alt="ADWYSD Pants">
+                  <span>ADWYSD Pants</span>
+                  <span class="price">85 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+                  <div class="item" data-name="Zara pants" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D892745127408" data-img="obraz_2025-04-12_200136634-removebg-preview.png" data-price="63" onclick="window.location.href=this.dataset.link">
+                      <img src="images/obraz_2025-04-12_200136634-removebg-preview.png" alt="Zara pants">
+                      <span>Zara pants XD</span>
+                      <span class="price">63 PLN</span>
+                      <span class="batch-info">Batch: Best</span>
+                  </div>
+            <div class="item" data-name="Palm Angels" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7244449983&affcode=hago105" data-img="palm.png" data-price="42" onclick="window.location.href=this.dataset.link">
+                    <img src="images/palm.png" alt="Palm Angels">
+                    <span>Palm Angels</span>
+                    <span class="price">42 PLN</span>
+                    <span class="batch-info">Batch: Random</span>
+                </div>
+            <div class="item" data-name="Eric Emanuel" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D677736694445&affcode=hago105" data-img="ee.png" data-price="16" onclick="window.location.href=this.dataset.link">
+                  <img src="images/ee.png" alt="Eric Emanuel">
+                  <span>Eric Emanuel (112 styles)</span>
+                  <span class="price">16 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">
+        <div class="category-title">Buty</div>
+        <div class="items-container">
+            <div class="item" data-name="Air Force Nocta" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7313599170" data-img="af1-nocta.png" data-price="143" onclick="window.location.href=this.dataset.link">
+                <img src="images/af1-nocta.png" alt="Air Force Nocta">
+                <span>Air Force Nocta</span>
+                <span class="price">143 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="New Balance Protection Pack Phantom Trairners" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7327079464&affcode=vector&redirected=true" data-img="obraz_2025-04-12_194840890.png" data-price="142" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_194840890.png" alt="New Balance Protection Pack Phantom Trairners">
+                  <span>New Balance Protection</span>
+                  <span class="price">142 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+
+                <div class="item" data-name="Foam runner" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7233266905&affcode=vector&redirected=true" data-img="obraz_2025-04-12_204752297.png" data-price="68" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_204752297.png" alt="Foam runner">
+                    <span>Foam runner</span>
+                    <span class="price">68 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+
+            <div class="item" data-name=" Adidas Campus " data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7233322089&affcode=vector&redirected=true" data-img="obraz_2025-04-12_204021793.png" data-price="107" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_204021793.png" alt=" Adidas Campus ">
+                  <span> Adidas Campus </span>
+                  <span class="price">107 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="UGG" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7248939111&affcode=hago105" data-img="ugg.png" data-price="97" onclick="window.location.href=this.dataset.link">
+                    <img src="images/ugg.png" alt="UGG">
+                    <span>UGG</span>
+                    <span class="price">97 PLN</span>
+                    <span class="batch-info">Batch: Random</span>
+                <div style="margin-top: 8px;">
+                    <a href="https://imgur.com/a/gyrasti" target="_blank" onclick="event.stopPropagation();" style="color: #007bff; text-decoration: underline; font-size: 14px;">
+                        📷 QC (sprawdź jakość)
+                    </a>
+                </div>
+            </div>
+              <div class="item" data-name="Crocs McQueen" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3Fspm%3Dfxg_1325870.all_page.0.0.1a6b1845pgF3LK%26itemID%3D7351169144" data-img="obraz_2025-04-12_210441663.png" data-price="114" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_210441663.png" alt="Crocs McQueen">
+                  <span>Crocs McQueen</span>
+                  <span class="price">114 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Dunk off-white (many lots)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7327014349&affcode=hago105" data-img="dunk2.png" data-price="176" onclick="window.location.href=this.dataset.link">
+                  <img src="images/dunk2.png" alt="Dunk off-white (many lots)">
+                  <span>Dunk off-white (many lots)</span>
+                  <span class="price">176 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+                <div class="item" data-name="Jordan 4 (many styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6656410659%26spider_token%3D2821" data-img="obraz_2025-04-12_155031266-removebg-preview.png" data-price="250" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_155031266-removebg-preview.png" alt="Jordan 4 (many styles)">
+                    <span>Jordan 4 (many styles)</span>
+                    <span class="price">250 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+            <div class="item" data-name="Vans" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D2638088084&affcode=hago105" data-img="obraz_2025-04-12_142513820" data-price="30" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_142513820.png" alt="Vans">
+                  <span>Vans</span>
+                  <span class="price">30 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Off-White x Air Dunk" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7382556403&affcode=hago105" data-img="obraz_2025-04-12_175723754.png" data-price="190" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_175723754.png" alt="Off-White x Air Dunk">
+                  <span>Off-White x Air Dunk</span>
+                  <span class="price">190 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Balenciaga track" data-link="https://kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7311979753" data-img="balenciaga-track.png" data-price="226" onclick="window.location.href=this.dataset.link">
+                <img src="images/balenciaga-track.png" alt="Balenciaga track">
+                <span>Balenciaga track</span>
+                <span class="price">226 PLN</span>
+                <span class="batch-info">Batch: Best(Good)</span>
+            </div>
+              <div class="item" data-name="Asics Gen&Nyc" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7268325384&affcode=peter" data-img="obraz_2025-04-12_204121220-removebg-preview.png" data-price="126" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_204121220-removebg-preview.png" alt="Asics Gen&Nyc">
+                  <span>Asics Gen&Nyc</span>
+                  <span class="price">126 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Air Force 1" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7082688636" data-img="obraz_2025-04-13_005836272.png" data-price="81" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_005836272.png" alt="Air Force 1">
+                  <span>Air Force 1</span>
+                  <span class="price">81 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Nike Kobe 6" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5565274991&affcode=hago105" data-img="kobe.png" data-price="209" onclick="window.location.href=this.dataset.link">
+                <img src="images/kobe.png" alt="Nike Kobe 6">
+                <span>Nike Kobe 6</span>
+                <span class="price">209 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="Rick Owens" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7238038716&affcode=hago105" data-img="rick1.png" data-price="200" onclick="window.location.href=this.dataset.link">
+                  <img src="images/rick1.png" alt="Rick Owens">
+                  <span>Rick Owens</span>
+                  <span class="price">200 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Zoom fly 6" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7312883028" data-img="fly6.png" data-price="137" onclick="window.location.href=this.dataset.link">
+                <img src="images/fly6.png" alt="Zoom fly 6">
+                <span>Zoom fly 6</span>
+                <span class="price">137 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+            <div class="item" data-name="Lanvin Leather Crab" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6268880823" data-img="lanvin.png" data-price="253" onclick="window.location.href=this.dataset.link">
+                <img src="images/lanvin.png" alt="Lanvin Leather Crab">
+                <span>Lanvin Leather Crab</span>
+                <span class="price">253 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="Air Jordan 11 (many styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7327031305&affcode=hago105" data-img="obraz_2025-04-12_160421175.PNG" data-price="170" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_160421175.png" alt="Air Jordan 11 (many styles)">
+                  <span>Air Jordan 11 (many styles)</span>
+                  <span class="price">170 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Adidas Gazels" data-link="https://kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7311834929" data-img="gazels.png" data-price="99" onclick="window.location.href=this.dataset.link">
+                <img src="images/gazels.png" alt="Adidas Gazels">
+                <span>Adidas Gazels</span>
+                <span class="price">99 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+                <div class="item" data-name="Balenciaga Defender" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7328052632&affcode=hago105" data-img="obraz_2025-04-12_181527957.png" data-price="225" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_181527957.png" alt="Balenciaga Defender">
+                    <span>Balenciaga Defender</span>
+                    <span class="price">225 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+            <div class="item" data-name="Travis Scott Jordan 1 (more styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5544310081&affcode=hago105" data-img="obraz_2025-04-12_180303020.png" data-price="203" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_180303020.png" alt="Travis Scott Jordan 1 (more styles)">
+                  <span>Travis Scott Jordan 1 (more styles)</span>
+                  <span class="price">203 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="LV Trainer" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6544965947&affcode=vector&redirected=true" data-img="obraz_2025-04-13_001603766.png" data-price="340" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_001603766.png" alt="LV Trainer">
+                  <span>LV Trainer</span>
+                  <span class="price">340 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="AIR Force 1 (more styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6539183234&affcode=vector&redirected=true" data-img="obraz_2025-04-13_002153867.png" data-price="92" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_002153867.png" alt="AIR Force 1 (more styles)">
+                  <span>Air Force 1 (more styles)</span>
+                  <span class="price">92 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Jordan 3 (many style)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7236323549&affcode=vector&redirected=true" data-img="obraz_2025-04-13_012714976.png" data-price="142" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_012714976.png" alt="Jordan 3 (many style)">
+                  <span>Jordan 3 (many style)</span>
+                  <span class="price">142 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+
+            <div class="item" data-name="Balenciaga Alaska" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7258812337&affcode=hago105" data-img="balenciaga-alaska.png" data-price="300" onclick="window.location.href=this.dataset.link">
+                  <img src="images/balenciaga-alaska.png" alt="Balenciaga Alaska">
+                  <span>Balenciaga Alaska</span>
+                  <span class="price">300 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+                <div class="item" data-name="NIKE Dunk (many style)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7311869379" data-img="obraz_2025-04-13_013055436.png" data-price="175" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-13_013055436.png" alt="NIKE Dunk (many style)">
+                    <span>NIKE Dunk (many style)</span>
+                    <span class="price">175 PLN</span>
+                    <span class="batch-info">Batch: Best</span>
+                </div>
+              <div class="item" data-name="AIR MAX 95 Cortez" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7311869379" data-img="obraz_2025-04-13_014454443.png" data-price="103" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_014454443.png" alt="AIR MAX 95 Cortez">
+                  <span>AIR MAX 95 Cortez</span>
+                  <span class="price">103 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Jordan 1 (more style)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7236083557&affcode=vector&redirected=true" data-img="obraz_2025-04-13_011805318.png" data-price="274" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_012611418-removebg-preview.png" alt="Jordan 1 (more style)">
+                  <span>Jordan 1 (many style)</span>
+                  <span class="price">274 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Bape Sta" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7312365705&affcode=hago105" data-img="images/bape.png" data-price="126" onclick="window.location.href=this.dataset.link">
+                <img src="images/bape.png" alt="Bape Sta">
+                <span>Bape Sta</span>
+                <span class="price">126 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+            <div class="item" data-name="Yeezy slide" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6357399660" data-img="slide.png" data-price="65" onclick="window.location.href=this.dataset.link">
+                <img src="images/slide.png" alt="Yeezy slide">
+                <span>Yeezy slide</span>
+                <span class="price">65 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+        <div class="item" data-name="Nike shox" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7247126616" data-img="nike-shox.png" data-price="115" onclick="window.location.href=this.dataset.link">
+                 <img src="images/nike-shox.png" alt="Nike shox">
+                 <span>Nike shox</span>
+                 <span class="price">115 PLN</span>
+                 <span class="batch-info">Batch: Random</span>
+             </div>
+            <div class="item" data-name="Air Force rope lace" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7340298533&affcode=hago105" data-img="ropelace.png" data-price="88" onclick="window.location.href=this.dataset.link">
+                <img src="images/ropelace.png" alt="Air Force rope lace">
+                <span>Air Force rope lace</span>
+                <span class="price">88 PLN</span>
+                <span class="batch-info">Batch: Random</span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">
+        <div class="category-title">Kurtki / Kamizelki</div>
+        <div class="items-container">
+                <div class="item" data-name="Stussy puffer" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7284845272&affcode=vector&redirected=true" data-img="obraz_2025-04-12_214404939-removebg-preview.png" data-price="253" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_214404939-removebg-preview.png" alt="Stussy puffer">
+                    <span>Stussy Puffer</span>
+                    <span class="price">253 PLN</span>
+                    <span class="batch-info">Batch: Random</span>
+                </div>
+
+              <div class="item" data-name="Moncler x Palm Angels Jucket" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7338182485&affcode=vector&redirected=true" data-img="obraz_2025-04-12_214951774.png" data-price="1105" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_214951774.png" alt="Moncler x Palm Angels Jucket">
+                  <span>Moncler x Palm Angels</span>
+                  <span class="price">1105 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Moncler x Palm Angels Jucket" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7265760823&affcode=vector&redirected=true" data-img="obraz_2025-04-12_215142439.png" data-price="381" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_215142439.png" alt="Moncler x Palm Angels Jucket">
+                  <span>Moncler x Spider Puffer</span>
+                  <span class="price">381 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+
+              <div class="item" data-name="Ralph Lauren Puffer Jacket" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7274416309&affcode=vector&redirected=true" data-img="obraz_2025-04-13_005324491.png" data-price="336" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_005324491.png" alt="Ralph Lauren Puffer Jacket">
+                  <span>Ralph Lauren Puffer Jacket</span>
+                  <span class="price">336 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Trapstar Shooters Puffer Jacketr" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D836324138409&affcode=vector&redirected=true" data-img="obraz_2025-04-13_004905675.png" data-price="166" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-13_004905675.png" alt="Trapstar Shooters Puffer Jacketr">
+                  <span>Trapstar Shooters Puffer Jacket</span>
+                  <span class="price">166 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+
+            <div class="item" data-name="Trapstar Puffer" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D794595773240&affcode=hago105" data-img="obraz_2025-04-12_213658212-removebg-preview.png" data-price="185" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_213658212-removebg-preview.png" alt="Trapstar Puffer">
+                  <span>Trapstar Puffer</span>
+                  <span class="price">185 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Moncler Vest" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7360322772&affcode=hago105" data-img="obraz_2025-04-12_214353925.png" data-price="192" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_214353925.png" alt="Moncler Vest">
+                  <span>Moncler Vest</span>
+                  <span class="price">192 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">
+        <div class="category-title">Random items</div>
+        <div class="items-container">
+            <div class="item" data-name="Nike Backpack" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3Fspm%3Dfxg_1325870.all_page.0.0.1d8c1845BJq45z%26itemID%3D7434798794" data-img="nike-elite-bp.png" data-price="46" onclick="window.location.href=this.dataset.link">
+                <img src="images/nike-elite-bp.png" alt="Nike Backpack">
+                <span>Nike Backpack</span>
+                <span class="price">46 PLN</span>
+                <span class="batch-info">Batch: Random</span>
+            </div>
+            <div class="item" data-name="Euro 2024 Ball" data-link="https://kakobuy.com/item/details?url=https%3A%2F%2Fdetail.tmall.com%2Fitem.htm%3Fspm%3Dfxg_1325870.all_page.0.0.2e611845HyGUkA%26id%3D799431511714" data-img="ball.png" data-price="46" onclick="window.location.href=this.dataset.link">
+                <img src="images/ball.png" alt="Euro 2024 Ball">
+                <span>Euro 2024 Ball</span>
+                <span class="price">46 PLN</span>
+                <span class="batch-info">Batch: Best</span>
+            </div>
+            <div class="item" data-name="Ralph socks" data-link="https://kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3Fspm%3Dfxg_1325870.all_page.0.0.344a1845eZvR5w%26itemID%3D6513562133" data-img="rlsocks.png" data-price="32" onclick="window.location.href=this.dataset.link">
+                <img src="images/rlsocks.png" alt="Ralph socks">
+                <span>Ralph socks</span>
+                <span class="price">32 PLN</span>
+                <span class="batch-info">Batch: Random</span>
+            </div>
+              <div class="item" data-name="Nike Socks (3 pair)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4315102593&affcode=hago105" data-img="nike-socks.png" data-price="19" onclick="window.location.href=this.dataset.link">
+                  <img src="images/nike-socks.png" alt="Nike Socks (3 pair)">
+                  <span>Nike Socks (3 pair)</span>
+                  <span class="price">19 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Cortiez socks" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6020853766&affcode=hago105" data-img="crtz5.png" data-price="10" onclick="window.location.href=this.dataset.link">
+                  <img src="images/crtz5.png" alt="Cortiez socks">
+                  <span>Cortiez socks</span>
+                  <span class="price">10 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Bape socks" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4432982633&affcode=hago105" data-img="bape-socks.png" data-price="12" onclick="window.location.href=this.dataset.link">
+                  <img src="images/bape-socks.png" alt="Bape socks">
+                  <span>Bape socks</span>
+                  <span class="price">12 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+            <div class="item" data-name="PSD underwear" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7250137890" data-img="psd.png" data-price="23" onclick="window.location.href=this.dataset.link">
+                <img src="images/psd.png" alt="PSD underwear">
+                <span>PSD underwear</span>
+                <span class="price">23 PLN</span>
+                <span class="batch-info">Batch: Random</span>
+            </div>
+                <div class="item" data-name="Dior Sauvage" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7315835085&affcode=hago105" data-img="obraz_2025-04-12_190503256.png" data-price="118" onclick="window.location.href=this.dataset.link">
+                    <img src="images/obraz_2025-04-12_190503256.png" alt="Dior Sauvage">
+                    <span>Dior Sauvage</span>
+                    <span class="price">118 PLN</span>
+                    <span class="batch-info">Batch: Random</span>
+                </div>
+              <div class="item" data-name="Syna Socks I Heart" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7437374445%26wfr%3Dc" data-img="obraz_2025-04-12_192456408-removebg-preview.png" data-price="31" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_192456408-removebg-preview.png" alt="Syna Socks I Heart">
+                  <span>Syna Socks I Heart</span>
+                  <span class="price">31 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+            <div class="item" data-name="Juice  WRLD Car  toy" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D860082137211&affcode=hago105" data-img="car-toy.png" data-price="71" onclick="window.location.href=this.dataset.link">
+                  <img src="images/car-toy.png" alt="Juice  WRLD Car  toy">
+                  <span>Juice  WRLD Car  toy</span>
+                  <span class="price">71 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Case (40 styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D673370134337&affcode=hago105" data-img="case.png" data-price="15" onclick="window.location.href=this.dataset.link">
+                  <img src="images/case.png" alt="Case (40 styles)">
+                  <span>Case (40 styles)</span>
+                  <span class="price">15 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+                <div class="item" data-name="Supreme bag" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7334143391&affcode=hago105" data-img="bag.png" data-price="27" onclick="window.location.href=this.dataset.link">
+                    <img src="images/bag.png" alt="Supreme bag">
+                    <span>Supreme bag</span>
+                    <span class="price">27 PLN</span>
+                    <span class="batch-info">Batch: Random</span>
+                </div>
+              <div class="item" data-name="Trapstar Bag" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7234164471&affcode=hago105" data-img="trapstar.png" data-price="42" onclick="window.location.href=this.dataset.link">
+                  <img src="images/trapstar.png" alt="Trapstar Bag">
+                  <span>Trapstar Bag</span>
+                  <span class="price">42 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+              <div class="item" data-name="Supreme  underwear" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D646667921664&affcode=hago105" data-img="supreme1.png" data-price="132" onclick="window.location.href=this.dataset.link">
+                  <img src="images/supreme1.png" alt="Supreme  underwear">
+                  <span>Supreme  underwear</span>
+                  <span class="price">132 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+              <div class="item" data-name="Calvin Klein underwear" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7436512511&affcode=hago105" data-img="ck.png" data-price="55" onclick="window.location.href=this.dataset.link">
+                  <img src="images/ck.png" alt="Calvin Klein underwear">
+                  <span>Calvin Klein underwear</span>
+                  <span class="price">55 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="Iced  out  chein (3 styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D776893629557&affcode=hago105" data-img="chein.png" data-price="15" onclick="window.location.href=this.dataset.link">
+                  <img src="images/chein.png" alt="Iced  out  chein (3 styles)">
+                  <span>Iced  out  chein (30 styles)</span>
+                  <span class="price">15 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+            </div>
+                <div class="item" data-name="G-Shock (many styles)" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D3771404148&affcode=peter" data-img="obraz_2025-04-12_205607782-removebg-preview.png" data-price="50" onclick="window.location.href=this.dataset.link">
+                <img src="images/obraz_2025-04-12_205607782-removebg-preview.png" alt="G-Shock (many styles)">
+                      <span>G-Shock (many styles)</span>
+                      <span class="price">50 PLN</span>
+                      <span class="batch-info">Batch: Random</span>
+                </div>
+            <div class="item" data-name="StockX tag" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D688183190786&affcode=hago105" data-img="stockx.png" data-price="11" onclick="window.location.href=this.dataset.link">
+                  <img src="images/stockx.png" alt="StockX tag">
+                  <span>StockX tag</span>
+                  <span class="price">11 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+            </div>
+            <div class="item" data-name="Victoria Secret Thongs" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D695672313297&affcode=vector&redirected=true" data-img="obraz_2025-04-12_205537548-removebg-preview.png" data-price="14" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_205537548-removebg-preview.png" alt="Victoria Secret Thongs">
+                  <span>Victoria Secret Thongs</span>
+                  <span class="price">14 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+            </div>
+              <div class="item" data-name="Rybo klapki" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7322347834&affcode=vector&redirected=true" data-img="obraz_2025-04-12_210858465.png" data-price="24" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_210858465.png" alt="Rybo klapki">
+                  <span>Rybo klapki</span>
+                  <span class="price">24 PLN</span>
+                  <span class="batch-info">Batch: best</span>
+              </div>
+              <div class="item" data-name="Samsung s24 Ultra" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fshop238424219.v.weidian.com%2Fitem.html%3FitemID%3D7220554043" data-img="obraz_2025-04-12_231404845.png" data-price="521" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_231404845.png" alt="Samsung s24 Ultra">
+                  <span>Samsung s24 Ultra</span>
+                  <span class="price">521 PLN</span>
+                  <span class="batch-info">Batch: Best</span>
+              </div>
+            <div class="item" data-name="LV BALL" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3Fspm%3Dfxg_1325870.all_page.0.0.16751845H7iToS%26itemID%3D4281670129" data-img="fly6.png" data-price="105" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_181145835-removebg-preview.png" alt="Lv Ball">
+                  <span>Lv Ball</span>
+                  <span class="price">105 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="wardrobe-category">         
+        <div class="category-title">Hats</div>    
+        <div class="items-container">
+            <div class="item" data-name="Denim Tears Cap" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D824887984638&affcode=hago105" data-img="obraz_2025-04-12_142135606-removebg-preview.png" data-price="37" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_142135606-removebg-preview.png" alt="Denim Tears Cap">
+                  <span>Denim Tears Cap</span>
+                  <span class="price">37 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+            <div class="item" data-name="Chrome Hearts cap" data-link="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5503266469&affcode=peter" data-img="obraz_2025-04-12_212602499-removebg-preview.png" data-price="19" onclick="window.location.href=this.dataset.link">
+                  <img src="images/obraz_2025-04-12_212602499-removebg-preview.png" alt="Chrome Hearts cap">
+                  <span>Chrome Hearts Cap</span>
+                  <span class="price">19 PLN</span>
+                  <span class="batch-info">Batch: Random</span>
+              </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div id="favorites-section" style="display:none;">
+        <h2>❤️ Twoje ulubione rzeczy</h2>
+        <div class="items-container" id="favorites-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
